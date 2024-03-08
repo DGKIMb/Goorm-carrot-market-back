@@ -34,4 +34,12 @@ public class MemberService {
 		findMember.updateProfile(reqDto.getName(), reqDto.getNickName(), reqDto.getPhoneNum(), reqDto.getAddress(),
 			reqDto.getLatitude(), reqDto.getLongitude());
 	}
+
+	public MemberResDto findByKakaoId(Long kakaoId) {
+		Member findMember = memberRepository.findByKakaoId(kakaoId).orElseThrow(
+				() -> new IllegalArgumentException("사용자가 존재하지 않습니다.")
+		);
+		return new MemberResDto(findMember);
+	}
+
 }
